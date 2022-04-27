@@ -12,6 +12,8 @@ public class Dispenser {
     private int salesMoney;
     //Variable with the number os products that user wants to buy
     private int buyProductQuantity;
+    //Array with the possible coins to be inserted and it's quantities
+    private int moneyBox[] = {5, 10, 20, 50};
 
     public Dispenser(int productPrice, int nProducts) {
         this.productPrice = productPrice;
@@ -21,8 +23,20 @@ public class Dispenser {
     }
 
     public int insertCoin(int coin) {
-        this.insertedMoney += coin;
+        if(coinInMoneyBox(coin)){
+            this.insertedMoney += coin;
+        }
         return this.insertedMoney;
+    }
+
+    private boolean coinInMoneyBox(int coin) {
+        for (int i = 0; i < this.moneyBox.length; i++) {
+            //Checks if coin is present in Money Box
+            if(coin == this.moneyBox[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int cancelBuyProduct() {

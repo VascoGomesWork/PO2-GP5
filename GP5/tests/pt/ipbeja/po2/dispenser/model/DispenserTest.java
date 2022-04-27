@@ -200,7 +200,22 @@ class DispenserTest {
 
     @Test
     void testInsertCoinsAndGetChangeWithAvailableCoins() {
-        //int[] acceptedMoney = this.dispenser.acceptedMoney();
-        //assertEquals([5, 10, 20, 50], acceptedMoney);
+
+        //Inserts a 5 Coin
+        assertEquals(5, this.dispenser.insertCoin(5));
+
+        //Inserts a 10 Coin
+        assertEquals(15, this.dispenser.insertCoin(10));
+
+        //Inserts a 20 Coin
+        assertEquals(35, this.dispenser.insertCoin(20));
+
+        //Inserts a 50 Coin
+        assertEquals(85, this.dispenser.insertCoin(50));
+
+        //Tries to Insert Coins that are not in the Money Box
+        assertEquals(85, this.dispenser.insertCoin(30));
+        assertEquals(85, this.dispenser.insertCoin(40));
+        assertEquals(85, this.dispenser.insertCoin(60));
     }
 }
