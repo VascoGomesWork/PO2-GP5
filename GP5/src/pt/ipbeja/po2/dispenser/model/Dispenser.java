@@ -128,7 +128,19 @@ public class Dispenser {
                 }
             }
         }
+        //In the End Retrieves the Coins from Money Box with the help of coinsToRetrieve array
+        retrieveCoinsFromMoneyBox();
         return change;
+    }
+
+    /**
+     * Resume : Function that Delete Coins from Money Box
+     */
+    private void retrieveCoinsFromMoneyBox() {
+        for (int j = 0; j < coinsCounter; j++) {
+            System.out.println("Coins to Retrieve = " + coinsToRetrieve[j]);
+            moneyBox[getCoinIndex(coinsToRetrieve[j])][1]--;
+        }
     }
 
     /**

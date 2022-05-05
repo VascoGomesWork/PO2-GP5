@@ -17,12 +17,10 @@ class DispenserTest {
     void setUp() {
         //Create Dispenser with Product Price to 40
         this.dispenser = new Dispenser(40, 10);
-
     }
 
     @Test
     void testInsertCoin() {
-
 
         //Inserts a Coin 20
         int balance = this.dispenser.insertCoin(20);
@@ -88,7 +86,6 @@ class DispenserTest {
 
         //Checks if the sales money is 40
         assertEquals(40, this.dispenser.getSalesMoney());
-
     }
 
     @Test
@@ -136,7 +133,6 @@ class DispenserTest {
 
         //Checks if the Number of Products has Changed
         assertEquals(20, this.dispenser.getNProducts());
-
     }
 
     @Test
