@@ -69,14 +69,18 @@ class DispenserTest {
     void testBuyProduct() {
 
         //Inserts a Coin 20
-        int balance = this.dispenser.insertCoin(50);
+        this.dispenser.insertCoin(10);
+        this.dispenser.insertCoin(10);
+        this.dispenser.insertCoin(10);
+        this.dispenser.insertCoin(10);
+        int balance = this.dispenser.insertCoin(10);
         assertEquals(50, balance);
 
         //Buys a Product and reduces the amount of Products
         this.dispenser.buyProduct(1);
 
         //Checks if the change is correct
-        int change = this.dispenser.getChange();
+        int change = this.dispenser.getAdminChange();
         assertEquals(10, change);
 
         //Checks if the products quantity is less
@@ -98,7 +102,7 @@ class DispenserTest {
         this.dispenser.buyProduct(1);
 
         //Checks if the change is correct
-        int change = this.dispenser.getChange();
+        int change = this.dispenser.getAdminChange();
         assertEquals(-15, change);
 
         //Checks if dispenser N Products is 10
@@ -157,7 +161,7 @@ class DispenserTest {
         assertEquals(40, this.dispenser.getSalesMoney());
 
         //Checks if the Change is 10
-        assertEquals(10, this.dispenser.getChange());
+        assertEquals(10, this.dispenser.getAdminChange());
     }
 
     @Test
@@ -182,7 +186,10 @@ class DispenserTest {
         //Checks if Dispenser Products is 10
         assertEquals(10, this.dispenser.getNProducts());
 
-        int balance = this.dispenser.insertCoin(120);
+        //Dispenser Machine only accepts 5, 10, 20, 50 coins
+        this.dispenser.insertCoin(50);
+        this.dispenser.insertCoin(50);
+        int balance = this.dispenser.insertCoin(20);
         assertEquals(120, balance);
 
         //Buys 3 Products
@@ -192,7 +199,7 @@ class DispenserTest {
         assertEquals(7, this.dispenser.getNProducts());
 
         //Checks if Change is 0
-        assertEquals(0, this.dispenser.getChange());
+        assertEquals(0, this.dispenser.getAdminChange());
 
         //Checks if Sales Money is 120
         assertEquals(120, this.dispenser.getSalesMoney());
@@ -217,5 +224,35 @@ class DispenserTest {
         assertEquals(85, this.dispenser.insertCoin(30));
         assertEquals(85, this.dispenser.insertCoin(40));
         assertEquals(85, this.dispenser.insertCoin(60));
+
+        //Changes the amount of coins of 5 and 10 in Money Box
+        assertEquals(90, this.dispenser.insertCoin(5));
+        assertEquals(100, this.dispenser.insertCoin(10));
+
+        //Gets the Amount of All Coins Allowed in Machine Dispenser
+        assertEquals(2, this.dispenser.getCoinAmount(5));
+        assertEquals(2, this.dispenser.getCoinAmount(10));
+
+        //115 Coins in Money Box
+
+        System.out.println("Before 5 = " + this.dispenser.getCoinAmount(5));
+        System.out.println("Before 10 = " + this.dispenser.getCoinAmount(10));
+        System.out.println("Before 20 = " + this.dispenser.getCoinAmount(20));
+        System.out.println("Before 50 = " + this.dispenser.getCoinAmount(50));
+        System.out.println();
+        //Buys a product of 40 Coins
+        // 20 + 10 + 10
+        this.dispenser.buyProduct(1);
+
+        //Checks if Change is 100 - 40 = 60
+        //TODO - Fix Get Change Method
+        assertEquals(60, this.dispenser.getAdminChange());
+
+        //Check if the quantity of the coins inserted are different when change is given
+        System.out.println();
+        System.out.println("After 5 = " + this.dispenser.getCoinAmount(5));
+        System.out.println("After 10 = " + this.dispenser.getCoinAmount(10));
+        System.out.println("After 20 = " + this.dispenser.getCoinAmount(20));
+        System.out.println("After 50 = " + this.dispenser.getCoinAmount(50));
     }
 }
